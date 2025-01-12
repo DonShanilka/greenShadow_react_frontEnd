@@ -19,7 +19,7 @@ const Sidebar = () => {
     {
       label: 'MENU',
       items: [
-        { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/dashboard' },
+        { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/' },
         { name: 'Crop', icon: <Trees size={20} />, path: '/crop' },
         { name: 'Field', icon: <BrickWall size={20} />, path: '/field' },
         { name: 'Equipment', icon: <Axe size={20} />, path: '/equipment' },
