@@ -8,6 +8,7 @@ const CropSlice = createSlice({
   reducers: {
     addCrop: (state, action) => {
       state.push(action.payload);
+      // console.log(addCrop);
     },
     updateCrop: (state, action) => {
       const index = state.findIndex(crop => crop.id === action.payload.id);

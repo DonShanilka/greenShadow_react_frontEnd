@@ -1,9 +1,6 @@
-import React from 'react'
+import React from "react";
 
-function CropTable({ formData, handleDelete }: { formData: any[], handleDelete: (index: number) => void }) {
-
-  console.log("Table Details: ",formData)
-
+function CropTable({ cropList = [], handleDelete }) {
   return (
     <div className="w-full mt-6 overflow-x-auto">
       <table className="min-w-full table-auto border-collapse">
@@ -17,9 +14,10 @@ function CropTable({ formData, handleDelete }: { formData: any[], handleDelete: 
             <th className="px-4 py-2 border-b">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {(Array.isArray(formData) ? formData : []).map((crop, index) => (
-            <tr key={index}>
+        <tbody className="text-center">
+          {cropList.map((crop) => (
+            <tr key={crop.id}>
+              <td className="px-4 py-2 border-b">{crop.id}</td>
               <td className="px-4 py-2 border-b">{crop.cropName}</td>
               <td className="px-4 py-2 border-b">{crop.scientificName}</td>
               <td className="px-4 py-2 border-b">{crop.category}</td>
@@ -27,7 +25,7 @@ function CropTable({ formData, handleDelete }: { formData: any[], handleDelete: 
               <td className="px-4 py-2 border-b">{crop.fieldId}</td>
               <td className="px-4 py-2 border-b">
                 <button
-                  onClick={() => handleDelete(index)}
+                  onClick={() => handleDelete(crop.id)}
                   className="bg-red-600 text-white py-1 px-3 rounded-md ml-2"
                 >
                   Delete
