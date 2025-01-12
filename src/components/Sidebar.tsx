@@ -1,121 +1,78 @@
 import React, { useState } from 'react';
-import { Home, FileText, User, Settings, Truck } from 'lucide-react';
-
-// Import Pages
-import DashboardPage from '../pages/DashboardPage';
-import CropsPage from '../pages/CropsPage';
-import FieldPage from '../pages/FieldPage';
-import StaffPage from '../pages/StaffPage';
-import VehicalPage from '../pages/VehicalPage';
-import EquipmentPage from '../pages/EquipmentPage';
-import CreateLogPage from '../pages/CreateLogPage';
-import AddLogPage from '../pages/AddLogPage';
-
-interface NavItemProps {
-  icon: React.ReactNode;
-  text: string;
-  isActive?: boolean;
-  onClick: () => void;
-}
-
-const NavItem: React.FC<NavItemProps> = ({ icon, text, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`flex items-center w-full px-4 py-2 my-1 text-sm rounded-lg hover:bg-gray-100 transition-colors
-      ${isActive ? 'bg-gray-100 text-green-600' : 'text-gray-700'}`}
-  >
-    <span className="w-5 h-5 mr-3">{icon}</span>
-    {text}
-  </button>
-);
+import { Link } from 'react-router-dom';
+import { 
+  LayoutDashboard,
+  Trees,
+  BrickWall,
+  Axe,
+  Tractor,
+  House,
+  FilePen,
+  FileText,
+  LogOutIcon
+} from 'lucide-react';
 
 const Sidebar = () => {
-  const [activePage, setActivePage] = useState('dashboard');
+  const [activeItem, setActiveItem] = useState('Dashboard');
 
-  // Function to render the active page
-  const renderActivePage = () => {
-    switch (activePage) {
-      case 'dashboard':
-        return <DashboardPage />;
-      case 'crops':
-        return <CropsPage />;
-      case 'field':
-        return <FieldPage />;
-      case 'staff':
-        return <StaffPage />;
-      case 'vehical':
-        return <VehicalPage />;
-      case 'equipment':
-        return <EquipmentPage />;
-      case 'create-log':
-        return <CreateLogPage />;
-      case 'add-log':
-        return <AddLogPage />;
-      default:
-        return <DashboardPage />;
-    }
-  };
+  const menuItems = [
+    {
+      label: 'MENU',
+      items: [
+        { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/dashboard' },
+        { name: 'Crop', icon: <Trees size={20} />, path: '/crop' },
+        { name: 'Field', icon: <BrickWall size={20} />, path: '/field' },
+        { name: 'Equipment', icon: <Axe size={20} />, path: '/equipment' },
+        { name: 'Vehicle', icon: <Tractor size={20} />, path: '/vehicle' },
+        { name: 'Staff', icon: <House size={20} />, path: '/staff' },
+        { name: 'Create Log', icon: <FilePen size={20} />, path: '/create-log' },
+        { name: 'Add Log', icon: <FileText size={20} />, path: '/add-log' },
+      ],
+    },
+    {
+      items: [
+        { name: 'LogOut', icon: <LogOutIcon size={20} />, path: '/logout' },
+      ],
+    },
+  ];
 
   return (
-    <div className="flex h-screen">
-      <div className="w-60 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-4">
-          <h1 className="text-xl font-semibold">Dashboard</h1>
-        </div>
-
-        <nav className="flex-1 px-2">
-          <NavItem
-            icon={<Home className="w-5 h-5" />}
-            text="Dashboard"
-            isActive={activePage === 'dashboard'}
-            onClick={() => setActivePage('dashboard')}
-          />
-          <NavItem
-            icon={<FileText className="w-5 h-5" />}
-            text="Crops"
-            isActive={activePage === 'crops'}
-            onClick={() => setActivePage('crops')}
-          />
-          <NavItem
-            icon={<FileText className="w-5 h-5" />}
-            text="Field"
-            isActive={activePage === 'field'}
-            onClick={() => setActivePage('field')}
-          />
-          <NavItem
-            icon={<User className="w-5 h-5" />}
-            text="Staff"
-            isActive={activePage === 'staff'}
-            onClick={() => setActivePage('staff')}
-          />
-          <NavItem
-            icon={<Truck className="w-5 h-5" />}
-            text="Vehical"
-            isActive={activePage === 'vehical'}
-            onClick={() => setActivePage('vehical')}
-          />
-          <NavItem
-            icon={<Settings className="w-5 h-5" />}
-            text="Equipment"
-            isActive={activePage === 'equipment'}
-            onClick={() => setActivePage('equipment')}
-          />
-          <NavItem
-            icon={<FileText className="w-5 h-5" />}
-            text="Create Log"
-            isActive={activePage === 'create-log'}
-            onClick={() => setActivePage('create-log')}
-          />
-          <NavItem
-            icon={<FileText className="w-5 h-5" />}
-            text="Add Log"
-            isActive={activePage === 'add-log'}
-            onClick={() => setActivePage('add-log')}
-          />
-        </nav>
+    <div className="w-64 min-h-screen bg-white p-4">
+      {/* Logo */}
+      <div className="flex items-center gap-2 mb-8">
+        <div className="w-6 h-6 bg-emerald-500 rounded-lg" />
+        <span className="text-lg font-semibold">Green Shadow</span>
       </div>
 
-      <div className="flex-1">{renderActivePage()}</div>
+      {/* Navigation Menu */}
+      <nav className="space-y-8">
+        {menuItems.map((section) => (
+          <div key={section.label}>
+            <ul className="space-y-2">
+              {section.items.map((item) => (
+                <li key={item.name}>
+                  <Link to={item.path}>
+                    <button
+                      onClick={() => setActiveItem(item.name)}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                        activeItem === item.name
+                          ? 'text-emerald-500 bg-emerald-50 font-medium relative'
+                          : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      {item.icon}
+                      <span>{item.name}</span>
+                      {activeItem === item.name && (
+                        <div className="absolute left-0 top-0 w-1 h-full bg-emerald-500 rounded-r-lg" />
+                      )}
+                    </button>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
     </div>
   );
 };

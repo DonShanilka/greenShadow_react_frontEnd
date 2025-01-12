@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CropTable({ cropList, handleDelete }: { cropList: any[], handleDelete: (index: number) => void }) {
+function CropTable({ formData, handleDelete }: { formData: any[], handleDelete: (index: number) => void }) {
 
-  console.log("Table Details: ",cropList)
+  console.log("Table Details: ",formData)
 
   return (
     <div className="w-full mt-6 overflow-x-auto">
@@ -18,7 +18,7 @@ function CropTable({ cropList, handleDelete }: { cropList: any[], handleDelete: 
           </tr>
         </thead>
         <tbody>
-          {(Array.isArray(cropList) ? cropList : []).map((crop, index) => (
+          {(Array.isArray(formData) ? formData : []).map((crop, index) => (
             <tr key={index}>
               <td className="px-4 py-2 border-b">{crop.cropName}</td>
               <td className="px-4 py-2 border-b">{crop.scientificName}</td>
