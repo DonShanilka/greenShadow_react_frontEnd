@@ -49,6 +49,7 @@ export default tseslint.config({
 })
 ```
 
+```js
 install -> 
 
 npm install -D tailwindcss postcss autoprefixer
@@ -56,3 +57,4 @@ npx tailwindcss init
 
 npm install -D @shadcn/ui
 npm install @radix-ui/react-select
+```
