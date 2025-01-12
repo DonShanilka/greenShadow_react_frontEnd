@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CropTable from './CropTable';
 
 const CropForm = () => {
   const [formData, setFormData] = useState({
@@ -47,10 +48,10 @@ const CropForm = () => {
   };
 
   return (
-    <div className="width-1 p-6 bg-white shadow-md rounded-lg">
-      <div className="space-y-4 width-1">
+    <div className="w-full p-6 bg-white shadow-md rounded-lg">
+      <div className="space-y-2 flex flex-wrap gap-4">
         {/* Crop Name Input */}
-        <div className="space-y-2">
+        <div className="w-full sm:w-1/2 md:w-1/3">
           <label htmlFor="cropName" className="block text-sm font-medium">Crop Name</label>
           <input
             id="cropName"
@@ -63,7 +64,7 @@ const CropForm = () => {
         </div>
 
         {/* Scientific Name Input */}
-        <div className="space-y-2">
+        <div className="w-full sm:w-1/2 md:w-1/3">
           <label htmlFor="scientificName" className="block text-sm font-medium">Scientific Name</label>
           <input
             id="scientificName"
@@ -76,7 +77,7 @@ const CropForm = () => {
         </div>
 
         {/* Category Dropdown */}
-        <div className="space-y-2">
+        <div className="w-full sm:w-1/2 md:w-1/3">
           <label htmlFor="category" className="block text-sm font-medium">Category</label>
           <select
             id="category"
@@ -95,7 +96,7 @@ const CropForm = () => {
         </div>
 
         {/* Season Dropdown */}
-        <div className="space-y-2">
+        <div className="w-full sm:w-1/2 md:w-1/3">
           <label htmlFor="season" className="block text-sm font-medium">Season</label>
           <select
             id="season"
@@ -114,7 +115,7 @@ const CropForm = () => {
         </div>
 
         {/* Field ID Input */}
-        <div className="space-y-2">
+        <div className="w-full sm:w-1/2 md:w-1/3">
           <label htmlFor="fieldId" className="block text-sm font-medium">Field ID</label>
           <input
             id="fieldId"
@@ -127,7 +128,7 @@ const CropForm = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 justify-end pt-4">
+        <div className="w-full flex gap-2 justify-end pt-4">
           <button
             onClick={handleSave}
             className="bg-green-600 text-white py-2 px-4 rounded-md"
@@ -148,6 +149,7 @@ const CropForm = () => {
           </button>
         </div>
       </div>
+      <CropTable cropList={formData} handleDelete={handleDelete}/>
     </div>
   );
 };
