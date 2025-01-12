@@ -46,7 +46,7 @@ const Sidebar = () => {
       {/* Navigation Menu */}
       <nav className="space-y-8">
         {menuItems.map((section) => (
-          <div key={section.label}>
+          <div>
             <ul className="space-y-2">
               {section.items.map((item) => (
                 <li key={item.name}>
