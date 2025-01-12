@@ -17,7 +17,6 @@ const Sidebar = () => {
 
   const menuItems = [
     {
-      label: 'MENU',
       items: [
         { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/' },
         { name: 'Crop', icon: <Trees size={20} />, path: '/crop' },
