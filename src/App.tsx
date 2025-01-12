@@ -4,10 +4,7 @@ import Sidebar from './components/Sidebar';
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex">
         <Sidebar />
-        {/* Your main content here */}
-      </div>
     </BrowserRouter>
   );
 }
