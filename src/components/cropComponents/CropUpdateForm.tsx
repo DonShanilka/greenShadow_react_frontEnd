@@ -1,44 +1,27 @@
 import React, { useState } from "react";
-import CropTable from "./CropTable";
-import { useDispatch, useSelector } from "react-redux";
-import { addCrop, deleteCrop, updateCrop } from "../../reducer/CropSlice";
 
-const CropForm = () => {
-  
-  interface FormData {
-    cropName: string;
-    scientificName: string;
-    category: string;
-    season: string;
-    fieldId: string;
-    cropImage: string | null;
-  }
-
-  const [formData, setFormData] = useState<FormData>({
-    cropName: "",
-    scientificName: "",
-    category: "",
-    season: "",
-    fieldId: "",
-    cropImage: null,
+const CropUpdateForm = ({onClose, onSave, initialData = {} }) => {
+  const [formData, setFormData] = useState({
+    cropName: initialData.cropName || "",
+    scientificName: initialData.scientificName || "",
+    category: initialData.category || "",
+    season: initialData.season || "",
+    fieldId: initialData.fieldId || "",
+    cropImage: initialData.cropImage || null,
   });
 
-  const cropList = useSelector((state) => state.crops); // Ensure accessing crops from Redux store
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState(initialData.cropImage || null);
+
   const categories = ["Vegetable", "Fruit", "Grain", "Legume"];
   const seasons = ["Spring", "Summer", "Fall", "Winter"];
-  const dispatch = useDispatch();
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setFormData((prevState) => ({
-        ...prevState,
-        cropImage: file.name,
-      }));
+      setFormData({ ...formData, cropImage: file.name });
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
+        setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -53,62 +36,18 @@ const CropForm = () => {
       formData.fieldId &&
       formData.cropImage
     ) {
-      // Add a unique id for each crop
-      const newCrop = {
-        ...formData,
-        id: new Date().getTime(), // Example of generating a unique id based on timestamp
-      };
-      dispatch(addCrop(newCrop)); // Dispatch to Redux store
-      setFormData({
-        cropName: "",
-        scientificName: "",
-        category: "",
-        season: "",
-        fieldId: "",
-        cropImage: null,
-      });
-      setImagePreview(null); // Clear preview
+      onSave(formData); // Trigger save action from parent
+      onClose(); // Close the modal
     } else {
-      alert("Please Fill in All Fields");
+      alert("Please fill in all fields.");
     }
   };
 
-  const handleDelete = (id: number) => {
-    dispatch(deleteCrop({ id })); // Dispatch deleteCrop action
-  };
-
-  const [isEditing, setIsEditing] = useState(false);
-const [editId, setEditId] = useState(null);
-
-const handleEdit = (crop) => {
-  setIsEditing(true);
-  setEditId(crop.id);
-  setFormData({
-    cropName: crop.cropName,
-    scientificName: crop.scientificName,
-    category: crop.category,
-    season: crop.season,
-    fieldId: crop.fieldId,
-    cropImage: crop.cropImage,
-  });
-  setImagePreview(null); // Reset preview if needed
-};
-
-const handleSaveOrUpdate = () => {
-  if (isEditing) {
-    dispatch(updateCrop({ ...formData, id: editId }));
-  } else {
-    dispatch(addCrop({ ...formData, id: new Date().getTime() }));
-  }
-  setIsEditing(false);
-  setEditId(null);
-  // resetForm();
-};
-
+  // if (!isOpen) return null;
 
   return (
-    <>
-      <div className="w-full p-6 bg-white shadow-md rounded-lg">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Crop Form</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
@@ -119,8 +58,8 @@ const handleSaveOrUpdate = () => {
               id="cropName"
               name="cropName"
               value={formData.cropName}
-              onChange={(val) =>
-                setFormData({ ...formData, cropName: val.target.value })
+              onChange={(e) =>
+                setFormData({ ...formData, cropName: e.target.value })
               }
               placeholder="Enter crop name"
               className="w-full p-2 border border-gray-200 rounded-md"
@@ -128,18 +67,15 @@ const handleSaveOrUpdate = () => {
           </div>
 
           <div>
-            <label
-              htmlFor="scientificName"
-              className="block text-sm font-medium"
-            >
+            <label htmlFor="scientificName" className="block text-sm font-medium">
               Scientific Name
             </label>
             <input
               id="scientificName"
               name="scientificName"
               value={formData.scientificName}
-              onChange={(val) =>
-                setFormData({ ...formData, scientificName: val.target.value })
+              onChange={(e) =>
+                setFormData({ ...formData, scientificName: e.target.value })
               }
               placeholder="Enter scientific name"
               className="w-full p-2 border border-gray-200 rounded-md"
@@ -154,8 +90,8 @@ const handleSaveOrUpdate = () => {
               id="category"
               name="category"
               value={formData.category}
-              onChange={(val) =>
-                setFormData({ ...formData, category: val.target.value })
+              onChange={(e) =>
+                setFormData({ ...formData, category: e.target.value })
               }
               className="w-full p-2 border border-gray-200 rounded-md"
             >
@@ -176,8 +112,8 @@ const handleSaveOrUpdate = () => {
               id="season"
               name="season"
               value={formData.season}
-              onChange={(val) =>
-                setFormData({ ...formData, season: val.target.value })
+              onChange={(e) =>
+                setFormData({ ...formData, season: e.target.value })
               }
               className="w-full p-2 border border-gray-200 rounded-md"
             >
@@ -198,8 +134,8 @@ const handleSaveOrUpdate = () => {
               id="fieldId"
               name="fieldId"
               value={formData.fieldId}
-              onChange={(val) =>
-                setFormData({ ...formData, fieldId: val.target.value })
+              onChange={(e) =>
+                setFormData({ ...formData, fieldId: e.target.value })
               }
               placeholder="Enter field ID"
               className="w-full p-2 border border-gray-200 rounded-md"
@@ -237,20 +173,16 @@ const handleSaveOrUpdate = () => {
               Save
             </button>
             <button
-              onClick={handleEdit}
-              className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+              onClick={onClose}
+              className="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600"
             >
-              Update
+              Cancel
             </button>
           </div>
         </div>
       </div>
-
-      <div className="mt-12">
-        <CropTable cropList={cropList} handleDelete={handleDelete} />
-      </div>
-    </>
+    </div>
   );
 };
 
-export default CropForm;
+export default CropUpdateForm;

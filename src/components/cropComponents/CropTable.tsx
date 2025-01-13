@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import CropUpdateForm from "./CropUpdateForm";
 
-function CropTable({ cropList = [], handleDelete }) {
+function CropTable({ cropList = [], handleDelete, handleUpdate }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCrop, setSelectedCrop] = useState(null);
+
+  const openUpdateModal = (crop) => {
+    setSelectedCrop(crop);
+    setIsModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setSelectedCrop(null);
+    setIsModalOpen(false);
+  };
+
+  const handleSave = (updatedData) => {
+    handleUpdate(updatedData); // Call the parent function to update the crop data
+    closeUpdateModal();
+  };
+
   return (
     <div className="w-full mt-6 overflow-x-auto">
       <table className="min-w-full table-auto border-collapse">
-        <thead>
+        <thead className="bg-green-900 text-zinc-50">
           <tr>
+            <th className="px-4 py-2 border-b">Crop ID</th>
             <th className="px-4 py-2 border-b">Crop Name</th>
             <th className="px-4 py-2 border-b">Scientific Name</th>
             <th className="px-4 py-2 border-b">Category</th>
@@ -25,6 +45,12 @@ function CropTable({ cropList = [], handleDelete }) {
               <td className="px-4 py-2 border-b">{crop.fieldId}</td>
               <td className="px-4 py-2 border-b">
                 <button
+                  onClick={() => openUpdateModal(crop)}
+                  className="bg-blue-600 text-white py-1 px-3 rounded-md"
+                >
+                  Update
+                </button>
+                <button
                   onClick={() => handleDelete(crop.id)}
                   className="bg-red-600 text-white py-1 px-3 rounded-md ml-2"
                 >
@@ -35,6 +61,20 @@ function CropTable({ cropList = [], handleDelete }) {
           ))}
         </tbody>
       </table>
+
+      {/* Update Modal */}
+      {isModalOpen && selectedCrop && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Update Crop</h2>
+            <CropUpdateForm
+              initialData={selectedCrop}
+              onSave={handleSave}
+              onClose={closeUpdateModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
