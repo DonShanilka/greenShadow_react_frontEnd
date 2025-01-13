@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import StaffTable from "./StaffTable";
 
 
 function StaffAddForm() {
@@ -234,7 +235,7 @@ function StaffAddForm() {
           {/* Staff Field ID */}
           <div>
             <label htmlFor="staffFieldId" className="block text-sm font-medium">
-              Staff Field ID
+              Field ID
             </label>
             <select
               id="staffFieldId"
@@ -258,8 +259,11 @@ function StaffAddForm() {
           ADD
         </button>
         </div>
-      
       </form>
+    </div>
+
+    <div className="mt-12">
+      <StaffTable/>      
     </div>
     </>
   )
