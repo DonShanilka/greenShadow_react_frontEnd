@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CropUpdateForm from "./CropUpdateForm";
+import { Delete, EditIcon } from "lucide-react";
 
 function CropTable({ cropList = [], handleDelete, handleUpdate }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,10 +16,10 @@ function CropTable({ cropList = [], handleDelete, handleUpdate }) {
     setIsModalOpen(false);
   };
 
-  const handleSave = (updatedData) => {
-    handleUpdate(updatedData); // Call the parent function to update the crop data
-    closeUpdateModal();
-  };
+  // const handleSave = (updatedData) => {
+  //   handleUpdate(updatedData); // Call the parent function to update the crop data
+  //   closeUpdateModal();
+  // };
 
   return (
     <div className="w-full mt-6 overflow-x-auto">
@@ -46,15 +47,15 @@ function CropTable({ cropList = [], handleDelete, handleUpdate }) {
               <td className="px-4 py-2 border-b">
                 <button
                   onClick={() => openUpdateModal(crop)}
-                  className="bg-blue-600 text-white py-1 px-3 rounded-md"
+                  className="bg-orange-400 hover:bg-orange-500 text-white py-1 px-3 rounded-md"
                 >
-                  Update
+                  <EditIcon/>
                 </button>
                 <button
                   onClick={() => handleDelete(crop.id)}
-                  className="bg-red-600 text-white py-1 px-3 rounded-md ml-2"
+                  className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded-md ml-2"
                 >
-                  Delete
+                  <Delete/>
                 </button>
               </td>
             </tr>
@@ -69,7 +70,6 @@ function CropTable({ cropList = [], handleDelete, handleUpdate }) {
             <h2 className="text-2xl font-bold mb-4">Update Crop</h2>
             <CropUpdateForm
               initialData={selectedCrop}
-              onSave={handleSave}
               onClose={closeUpdateModal}
             />
           </div>

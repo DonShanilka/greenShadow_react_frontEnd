@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CropTable from "./CropTable";
 import { useDispatch, useSelector } from "react-redux";
 import { addCrop, deleteCrop, updateCrop } from "../../reducer/CropSlice";
+import { Save, SaveAll } from "lucide-react";
 
 const CropForm = () => {
   
@@ -123,7 +124,7 @@ const handleSaveOrUpdate = () => {
                 setFormData({ ...formData, cropName: val.target.value })
               }
               placeholder="Enter crop name"
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             />
           </div>
 
@@ -142,7 +143,7 @@ const handleSaveOrUpdate = () => {
                 setFormData({ ...formData, scientificName: val.target.value })
               }
               placeholder="Enter scientific name"
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             />
           </div>
 
@@ -157,7 +158,7 @@ const handleSaveOrUpdate = () => {
               onChange={(val) =>
                 setFormData({ ...formData, category: val.target.value })
               }
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             >
               <option value="">Select category</option>
               {categories.map((category) => (
@@ -179,7 +180,7 @@ const handleSaveOrUpdate = () => {
               onChange={(val) =>
                 setFormData({ ...formData, season: val.target.value })
               }
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             >
               <option value="">Select season</option>
               {seasons.map((season) => (
@@ -202,7 +203,7 @@ const handleSaveOrUpdate = () => {
                 setFormData({ ...formData, fieldId: val.target.value })
               }
               placeholder="Enter field ID"
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             />
           </div>
 
@@ -216,7 +217,7 @@ const handleSaveOrUpdate = () => {
               name="image"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full p-2 border border-gray-200 rounded-md"
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             />
             {imagePreview && (
               <div className="mt-2">
@@ -232,15 +233,9 @@ const handleSaveOrUpdate = () => {
           <div className="flex gap-2 justify-end pt-4 col-span-2">
             <button
               onClick={handleSave}
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              className="bg-emerald-500 font-bold text-white py-2 px-4 rounded-md hover:bg-emerald-600 w-32 "
             >
-              Save
-            </button>
-            <button
-              onClick={handleEdit}
-              className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
-            >
-              Update
+              SAVE
             </button>
           </div>
         </div>
