@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import VehicalTable from "./VehicalTable";
 
 function VehicleAddForm() {
 
@@ -145,6 +146,10 @@ function VehicleAddForm() {
           </button>
         </div>
       </form>
+    </div>
+
+    <div className="mt-12">
+      <VehicalTable/>
     </div>
     </>
   )
