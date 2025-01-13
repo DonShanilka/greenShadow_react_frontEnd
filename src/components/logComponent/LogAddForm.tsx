@@ -28,7 +28,7 @@ function LogAddForm() {
 
   return (
     <div className="w-full p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Add Log</h2>
+      <h2 className="text-2xl font-bold mb-4"></h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Log Date */}
@@ -47,23 +47,6 @@ function LogAddForm() {
             />
           </div>
 
-          {/* Log Details */}
-          <div>
-            <label htmlFor="logDetails" className="block text-sm font-medium">
-              Log Details
-            </label>
-            <textarea
-              id="logDetails"
-              name="logDetails"
-              rows={4}
-              value={logDetails}
-              onChange={(e) => setLogDetails(e.target.value)}
-              placeholder="Enter your log details..."
-              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
-              required
-            ></textarea>
-          </div>
-
           {/* Image Upload */}
           <div>
             <label htmlFor="logImage" className="block text-sm font-medium">
@@ -79,6 +62,23 @@ function LogAddForm() {
             />
           </div>
         </div>
+
+        {/* Log Details */}
+        <div>
+            <label htmlFor="logDetails" className="block text-sm font-medium">
+              Log Details
+            </label>
+            <textarea
+              id="logDetails"
+              name="logDetails"
+              rows={4}
+              value={logDetails}
+              onChange={(e) => setLogDetails(e.target.value)}
+              placeholder="Enter your log details..."
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            ></textarea>
+          </div>
 
         <div className="flex gap-2 justify-end pt-4">
           <button
