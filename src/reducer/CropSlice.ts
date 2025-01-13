@@ -11,7 +11,7 @@ const CropSlice = createSlice({
       // console.log(addCrop);
     },
     updateCrop: (state, action) => {
-      const index = state.findIndex(crop => crop.id === action.payload.id);
+      const index = state.findIndex(crop => crop.cropId === action.payload.cropId);
       if (index !== -1) {
         state[index] = {
           ...state[index],
@@ -20,7 +20,7 @@ const CropSlice = createSlice({
       }
     },
     deleteCrop: (state,action) => {
-      return state.filter((crop) => crop.id !== action.payload.id);
+      return state.filter((crop) => crop.cropId !== action.payload.cropId);
     },
   },
 })

@@ -31,8 +31,19 @@ const CropUpdateForm = ({onClose, initialData = {} }) => {
   };
 
   const handleUpdate = () => {
-    if (formData.cropId) {
-      dispatch(updateCrop(formData));
+    if (
+      formData.cropId && 
+      formData.cropName &&
+      formData.scientificName &&
+      formData.category &&
+      formData.season &&
+      formData.fieldId &&
+      formData.cropImage
+    ) {
+
+      const updateData = {...formData}
+      console.log(updateData)
+      dispatch(updateCrop(updateData));
       setFormData({cropId: "",
         cropName: "",
         scientificName: "",
