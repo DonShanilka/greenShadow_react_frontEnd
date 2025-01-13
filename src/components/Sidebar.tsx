@@ -55,14 +55,14 @@ const Sidebar = () => {
                       onClick={() => setActiveItem(item.name)}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                         activeItem === item.name
-                          ? 'text-emerald-500 bg-emerald-50 font-medium relative'
-                          : 'text-gray-600 hover:bg-gray-50'
+                          ? 'text-emerald-600 bg-emerald-50 font-medium relative'
+                          : 'text-gray-600 hover:bg-gray-200'
                       }`}
                     >
                       {item.icon}
                       <span>{item.name}</span>
                       {activeItem === item.name && (
-                        <div className="absolute left-0 top-0 w-1 h-full bg-emerald-500 rounded-r-lg" />
+                        <div className="absolute left-0 top-0 w-1 h-full bg-emerald-600 rounded-r-lg" />
                       )}
                     </button>
                   </Link>
