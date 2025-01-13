@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import EquipmentTable from "./EquipmentTable";
 
 function EquipmentAddForm() {
 
@@ -36,7 +37,7 @@ function EquipmentAddForm() {
   return (
     <>
     <div className="w-full p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Add Equipment</h2>
+      <h2 className="text-2xl font-bold mb-4"></h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
@@ -152,6 +153,10 @@ function EquipmentAddForm() {
           </button>
         </div>
       </form>
+    </div>
+
+    <div className="mt-12">
+      <EquipmentTable/>
     </div>
     </>
   )
