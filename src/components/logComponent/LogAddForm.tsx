@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import LogTable from "./LogTable";
 import { useDispatch, useSelector } from "react-redux";
+import { addLog, deleteLog } from "../../reducer/LogEntrySlice";
 
 function LogAddForm() {
   const [logDate, setLogDate] = useState("");
   const [logDetails, setLogDetails] = useState("");
   const [logImage, setLogImage] = useState<File | null>(null);
 
-  const equipmentList = useSelector((state : any) => state.equipments);
+  const equipmentList = useSelector((state : any) => state.logs);
   const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,8 +22,20 @@ function LogAddForm() {
       formData.append("logImage", logImage);
     }
 
+    if (logDate && logDetails && logImage !== null) {
+      dispatch(addLog(formData));
+      setLogDate("");
+      setLogDetails("");
+      setLogImage(null);
+    } else {
+      alert("Please Fill in All Fields");
+    }
     console.log("Form submitted:", { logDate, logDetails, logImage });
     // Submit the form data to an API or parent function
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteLog({ id })); 
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +111,7 @@ function LogAddForm() {
     </div>
 
     <div className="mt-12">
-      <LogTable/>
+      <LogTable equipmentList={equipmentList} />
     </div>
     </>
   );
