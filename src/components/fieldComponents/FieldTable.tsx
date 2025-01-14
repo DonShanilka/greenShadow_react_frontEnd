@@ -1,17 +1,18 @@
 import { Delete, EditIcon } from "lucide-react";
 import { useState } from "react";
+import FieldUpdateForm from "./FieldUpdateForm";
 
 function FieldTable({ fieldList = [], handleDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCrop, setSelectedCrop] = useState(null);
+  const [selectedField, setSelectedField] = useState(null);
 
   const openUpdateModal = (field) => {
-    setSelectedCrop(field);
+    setSelectedField(field);
     setIsModalOpen(true);
   };
 
   const closeUpdateModal = () => {
-    setSelectedCrop(null);
+    setSelectedField(null);
     setIsModalOpen(false);
   };
 
@@ -82,6 +83,17 @@ function FieldTable({ fieldList = [], handleDelete }) {
           ))}
         </tbody>
       </table>
+      {/* Update Modal */}
+      {isModalOpen && selectedField && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-full max-w-2xl p-6 rounded-lg shadow-lg">
+            <FieldUpdateForm
+              initialData={selectedField}
+              onClose={closeUpdateModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
