@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import StaffTable from "./StaffTable";
+import { useDispatch, useSelector } from "react-redux";
+import { addStaff } from "../../reducer/StaffSlice";
 
 
 function StaffAddForm() {
@@ -40,6 +42,9 @@ function StaffAddForm() {
     staffFieldId: "",
   });
 
+  const staffList = useSelector((state : any) => state.staffs);
+  const dispatch = useDispatch();
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -52,7 +57,46 @@ function StaffAddForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
+    
+    if (
+      formData.firstName &&
+      formData.lastName &&
+      formData.designation &&
+      formData.gender &&
+      formData.joinedDate &&
+      formData.dob &&
+      formData.contactNo &&
+      formData.email &&
+      formData.role &&
+      formData.address1 &&
+      formData.address2 &&
+      formData.address3 &&
+      formData.address4 &&
+      formData.address5 &&
+      formData.staffFieldId
+    ) {
+      const newStaffData = {...formData, id: new Date().getTime(),};
+      dispatch(addStaff(newStaffData));
+      setFormData({
+        firstName: "",
+        lastName: "",
+        designation: "",
+        gender: "MALE",
+        joinedDate: "",
+        dob: "",
+        contactNo: "",
+        email: "",
+        role: "MANAGER",
+        address1: "",
+        address2: "",
+        address3: "",
+        address4: "",
+        address5: "",
+        staffFieldId: "",
+      });
+    } else {
+      alert("Please Fill in All Fields");
+    }
   };
 
   return (
@@ -245,7 +289,9 @@ function StaffAddForm() {
               className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             >
               <option value="">Choose Field ID</option>
-              {/* Dynamic options to be added */}
+              {/* Replace with dynamic options */}
+              <option value="field1">Field 1</option>
+              <option value="field2">Field 2</option>
             </select>
           </div>
         </div>
@@ -263,7 +309,7 @@ function StaffAddForm() {
     </div>
 
     <div className="mt-12">
-      <StaffTable/>      
+      <StaffTable staffList={staffList} />      
     </div>
     </>
   )

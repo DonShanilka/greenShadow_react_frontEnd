@@ -1,6 +1,7 @@
+import { Delete, EditIcon } from 'lucide-react'
 import React from 'react'
 
-function StaffTable() {
+function StaffTable({staffList = []}) {
   return (
     <>
       <div className="w-full mt-6 overflow-x-auto">
@@ -27,16 +28,26 @@ function StaffTable() {
           </tr>
         </thead>
         <tbody className="text-center">
-          {/* {fields.map((field) => (
-            <tr key={field.id}>
-              <td className="px-4 py-2 border-b">{field.fieldId}</td>
-              <td className="px-4 py-2 border-b">{field.fieldName}</td>
-              <td className="px-4 py-2 border-b">{field.location}</td>
-              <td className="px-4 py-2 border-b">{field.extentSize}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage1}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage2}</td>
+          {staffList.map((staff) => (
+            <tr key={staff.id}>
+              <td className="px-4 py-2 border-b">{staff.id}</td>
+              <td className="px-4 py-2 border-b">{staff.firstName}</td>
+              <td className="px-4 py-2 border-b">{staff.lastName}</td>
+              <td className="px-4 py-2 border-b">{staff.designation}</td>
+              <td className="px-4 py-2 border-b">{staff.gender}</td>
+              <td className="px-4 py-2 border-b">{staff.joinedDate}</td>
+              <td className="px-4 py-2 border-b">{staff.dob}</td>
+              <td className="px-4 py-2 border-b">{staff.contactNo}</td>
+              <td className="px-4 py-2 border-b">{staff.email}</td>
+              <td className="px-4 py-2 border-b">{staff.role}</td>
+              <td className="px-4 py-2 border-b">{staff.address1}</td>
+              <td className="px-4 py-2 border-b">{staff.address2}</td>
+              <td className="px-4 py-2 border-b">{staff.address3}</td>
+              <td className="px-4 py-2 border-b">{staff.address4}</td>
+              <td className="px-4 py-2 border-b">{staff.address5}</td>
+              <td className="px-4 py-2 border-b">{staff.staffFieldId}</td>
               <td className="px-4 py-2 border-b">
-                <button
+                {/* <button
                   onClick={() => openUpdateModal(field)}
                   className="bg-orange-400 hover:bg-orange-500 text-white py-1 px-3 rounded-md"
                 >
@@ -47,10 +58,10 @@ function StaffTable() {
                   className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded-md ml-2"
                 >
                   <Delete />
-                </button>
+                </button> */}
               </td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </div>
