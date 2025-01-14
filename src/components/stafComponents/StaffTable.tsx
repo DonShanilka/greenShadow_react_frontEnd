@@ -1,6 +1,5 @@
 import { Delete, EditIcon } from 'lucide-react'
 import React, { useState } from 'react'
-import { Staff } from '../../model/Staff';
 
 function StaffTable({staffList = [], handleDelete}) {
 
@@ -12,6 +11,10 @@ function StaffTable({staffList = [], handleDelete}) {
     setIsModalOpen(true);
   }
 
+  const closeUpdateModal = () => {
+    setSelectedStaff(null);
+    setIsModalOpen(false);
+  }
 
   return (
     <>
