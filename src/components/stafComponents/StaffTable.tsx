@@ -1,9 +1,17 @@
 import { Delete, EditIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
+import { Staff } from '../../model/Staff';
 
-function StaffTable({staffList = []}) {
+function StaffTable({staffList = [], handleDelete}) {
 
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStaff , setSelectedStaff] = useState(null);
+
+  const openUpdateModal = (staff : any) => {
+    setSelectedStaff(staff);
+    setIsModalOpen(true);
+  }
+
 
   return (
     <>
@@ -50,18 +58,18 @@ function StaffTable({staffList = []}) {
               <td className="px-4 py-2 border-b">{staff.address5}</td>
               <td className="px-4 py-2 border-b">{staff.staffFieldId}</td>
               <td className="px-4 py-2 border-b">
-                {/* <button
+                <button
                   onClick={() => openUpdateModal(field)}
                   className="bg-orange-400 hover:bg-orange-500 text-white py-1 px-3 rounded-md"
                 >
                   <EditIcon />
                 </button>
                 <button
-                  onClick={() => handleDelete(field.id)}
+                  onClick={() => handleDelete(staff.id)}
                   className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded-md ml-2"
                 >
                   <Delete />
-                </button> */}
+                </button>
               </td>
             </tr>
           ))}
