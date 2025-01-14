@@ -26,9 +26,6 @@ function EquipmentAddForm() {
   const equipmentList = useSelector((state) => state.equipments);
   const dispatch = useDispatch();
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editId, setEditId] = useState(null);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

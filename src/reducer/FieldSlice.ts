@@ -20,7 +20,7 @@ const FieldSlice = createSlice({
       }
     },
     deleteField: (state,action) => {
-      return state.filter((field) => field.fieldId !== action.payload.fieldId);
+      return state.filter((field) => field.id !== action.payload.id);
     },
   },
 })

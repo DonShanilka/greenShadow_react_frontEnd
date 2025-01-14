@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { Delete, EditIcon } from "lucide-react";
+import { useState } from "react";
 
 function FieldTable({ fieldList = [], handleDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,9 +14,6 @@ function FieldTable({ fieldList = [], handleDelete }) {
     setSelectedCrop(null);
     setIsModalOpen(false);
   };
-
-  // Ensure fieldList is an array
-  const fields = Array.isArray(fieldList) ? fieldList : [];
 
   return (
     <div className="w-full mt-6 overflow-x-auto">
@@ -33,14 +30,40 @@ function FieldTable({ fieldList = [], handleDelete }) {
           </tr>
         </thead>
         <tbody className="text-center">
-          {fields.map((field) => (
+          {fieldList.map((field) => (
             <tr key={field.id}>
-              <td className="px-4 py-2 border-b">{field.fieldId}</td>
+              <td className="px-4 py-2 border-b">{field.id}</td>
               <td className="px-4 py-2 border-b">{field.fieldName}</td>
               <td className="px-4 py-2 border-b">{field.location}</td>
               <td className="px-4 py-2 border-b">{field.extentSize}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage1}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage2}</td>
+              <td className="px-4 py-2 border-b">
+                {field.fieldImage1 ? (
+                  <a
+                    href={URL.createObjectURL(field.fieldImage1)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                  >
+                    {field.fieldImage1.name}
+                  </a>
+                ) : (
+                  "No Image"
+                )}
+              </td>
+              <td className="px-4 py-2 border-b">
+                {field.fieldImage2 ? (
+                  <a
+                    href={URL.createObjectURL(field.fieldImage2)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                  >
+                    {field.fieldImage2.name}
+                  </a>
+                ) : (
+                  "No Image"
+                )}
+              </td>
               <td className="px-4 py-2 border-b">
                 <button
                   onClick={() => openUpdateModal(field)}

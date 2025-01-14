@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import FieldTable from "./FieldTable";
+import { useDispatch, useSelector } from "react-redux";
+import { addField, deleteField } from "../../reducer/FieldSlice";
 
 interface FieldFormData {
-  fieldId:string;
   fieldName: string;
   location: string;
   extentSize: string;
@@ -12,7 +13,6 @@ interface FieldFormData {
 
 const FieldAddForm = () => {
   const [formData, setFormData] = useState<FieldFormData>({
-    fieldId:"",
     fieldName: "",
     location: "",
     extentSize: "",
@@ -38,14 +38,42 @@ const FieldAddForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const fieldList = useSelector((state: any) => state.fields);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    // Add your logic to handle form submission, such as an API call
+
+    if (
+      formData.fieldName &&
+      formData.location &&
+      formData.extentSize &&
+      formData.fieldImage1 &&
+      formData.fieldImage2
+    ) {
+      const newFieldData = {
+        ...formData,
+        id: new Date().getTime(),
+        // Optionally include file names for display purposes
+        fieldImage1Name: formData.fieldImage1.name,
+        fieldImage2Name: formData.fieldImage2.name,
+      };
+      dispatch(addField(newFieldData));
+      setFormData({
+        fieldName: "",
+        location: "",
+        extentSize: "",
+        fieldImage1: null,
+        fieldImage2: null,
+      });
+      console.log(newFieldData);
+    } else {
+      alert("Please Fill in All Fields");
+    }
   };
 
   const handleDelete = (id: number) => {
-    // dispatch(deleteCrop({ id })); // Dispatch deleteCrop action
+    dispatch(deleteField({ id }));
   };
 
   return (
@@ -146,7 +174,7 @@ const FieldAddForm = () => {
       </div>
 
       <div className="mt-12">
-        <FieldTable fieldList={formData} handleDelete={handleDelete} />
+        <FieldTable fieldList={fieldList} handleDelete={handleDelete} />
       </div>
     </>
   );
