@@ -1,5 +1,6 @@
 import { Delete, EditIcon } from 'lucide-react'
 import React, { useState } from 'react'
+import StaffUpdateForm from './StaffUpdateForm';
 
 function StaffTable({staffList = [], handleDelete}) {
 
@@ -78,6 +79,18 @@ function StaffTable({staffList = [], handleDelete}) {
           ))}
         </tbody>
       </table>
+
+      {/* Update Modal */}
+      {isModalOpen && selectedStaff && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-full max-w-2xl p-6 rounded-lg shadow-lg">
+            <StaffUpdateForm
+              initialData={selectedStaff}
+              onClose={closeUpdateModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
     </>
   )
