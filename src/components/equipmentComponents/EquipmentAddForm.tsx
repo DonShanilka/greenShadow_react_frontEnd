@@ -57,13 +57,14 @@ function EquipmentAddForm() {
         staffIdOnEquipment: "",
         fieldIdOnEquipment: "",
       });
+      console.log(newEq)
     } else {
       alert("Please Fill in All Fields");
     }
   };
 
   const handleDelete = (id: number) => {
-    dispatch(deleteEquipment({ id })); // Dispatch deleteCrop action
+    dispatch(deleteEquipment({ id })); 
   };
 
   return (

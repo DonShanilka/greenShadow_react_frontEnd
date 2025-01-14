@@ -20,7 +20,7 @@ const EquipmentSlice = createSlice({
       }
     },
     deleteEquipment: (state,action) => {
-      return state.filter((equipment) => equipment.equipmentId !== action.payload.equipmentId);
+      return state.filter((equipment) => equipment.id !== action.payload.id);
     },
   },
 })
