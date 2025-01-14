@@ -1,7 +1,22 @@
 import { Delete, EditIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
-function EquipmentTable() {
+function EquipmentTable({equipmentList = [],handleDelete}) {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEqu, setSelectedEqu] = useState(null);
+
+  const openUpdateModal = (equipment) => {
+    setSelectedEqu(equipment);
+    setIsModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setSelectedEqu(null);
+    setIsModalOpen(false);
+  };
+
+
   return (
     <div className="w-full mt-6 overflow-x-auto">
       <table className="min-w-full table-auto border-collapse">
@@ -18,30 +33,31 @@ function EquipmentTable() {
           </tr>
         </thead>
         <tbody className="text-center">
-          {/* {fields.map((field) => (
-            <tr key={field.id}>
-              <td className="px-4 py-2 border-b">{field.fieldId}</td>
-              <td className="px-4 py-2 border-b">{field.fieldName}</td>
-              <td className="px-4 py-2 border-b">{field.location}</td>
-              <td className="px-4 py-2 border-b">{field.extentSize}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage1}</td>
-              <td className="px-4 py-2 border-b">{field.fieldImage2}</td>
+          {equipmentList.map((equipment) => (
+            <tr key={equipment.id}>
+              <td className="px-4 py-2 border-b">{equipment.id}</td>
+              <td className="px-4 py-2 border-b">{equipment.name}</td>
+              <td className="px-4 py-2 border-b">{equipment.type}</td>
+              <td className="px-4 py-2 border-b">{equipment.availableCount}</td>
+              <td className="px-4 py-2 border-b">{equipment.eqstatus}</td>
+              <td className="px-4 py-2 border-b">{equipment.staffIdOnEquipment}</td>
+              <td className="px-4 py-2 border-b">{equipment.fieldIdOnEquipment}</td>
               <td className="px-4 py-2 border-b">
                 <button
-                  onClick={() => openUpdateModal(field)}
+                  onClick={() => openUpdateModal(equipment)}
                   className="bg-orange-400 hover:bg-orange-500 text-white py-1 px-3 rounded-md"
                 >
                   <EditIcon />
                 </button>
                 <button
-                  onClick={() => handleDelete(field.id)}
+                  onClick={() => handleDelete(equipment.id)}
                   className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded-md ml-2"
                 >
                   <Delete />
                 </button>
               </td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </div>

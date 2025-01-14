@@ -24,7 +24,7 @@ const CropForm = () => {
     cropImage: null,
   });
 
-  const cropList = useSelector((state) => state.crops); // Ensure accessing crops from Redux store
+  const cropList = useSelector((state) => state.crops); 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const categories = ["Vegetable", "Fruit", "Grain", "Legume"];
   const seasons = ["Spring", "Summer", "Fall", "Winter"];
@@ -79,7 +79,7 @@ const CropForm = () => {
   };
 
   const [isEditing, setIsEditing] = useState(false);
-const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState(null);
 
 const handleEdit = (crop) => {
   setIsEditing(true);

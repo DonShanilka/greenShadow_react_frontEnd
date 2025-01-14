@@ -19,11 +19,11 @@ const EquipmentSlice = createSlice({
         };
       }
     },
-    deleteEquipmentCrop: (state,action) => {
+    deleteEquipment: (state,action) => {
       return state.filter((equipment) => equipment.equipmentId !== action.payload.equipmentId);
     },
   },
 })
 
-export const {addEquipment, updateEquipment, deleteEquipmentCrop} = EquipmentSlice.actions;
+export const {addEquipment, updateEquipment, deleteEquipment} = EquipmentSlice.actions;
 export default EquipmentSlice.reducer

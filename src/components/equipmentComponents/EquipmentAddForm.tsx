@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import EquipmentTable from "./EquipmentTable";
+import { useDispatch, useSelector } from "react-redux";
+import { addEquipment, deleteEquipment} from "../../reducer/EquipmentSlice";
 
 function EquipmentAddForm() {
 
@@ -16,12 +18,18 @@ function EquipmentAddForm() {
     name: "",
     type: "",
     availableCount: 0,
-    eqstatus: "Available",
+    eqstatus: "",
     staffIdOnEquipment: "",
     fieldIdOnEquipment: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const equipmentList = useSelector((state) => state.equipments);
+  const dispatch = useDispatch();
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -29,9 +37,33 @@ function EquipmentAddForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    // onSubmit(formData);
+    if (formData.name &&
+      formData.type &&
+      formData.availableCount &&
+      formData.eqstatus &&
+      formData.staffIdOnEquipment &&
+      formData.fieldIdOnEquipment
+    ) {
+      const newEq = {...formData, id: new Date().getTime(),};
+      dispatch(addEquipment(newEq));
+      setFormData({
+        name: "",
+        type: "",
+        availableCount: 0,
+        eqstatus: "",
+        staffIdOnEquipment: "",
+        fieldIdOnEquipment: "",
+      });
+    } else {
+      alert("Please Fill in All Fields");
+    }
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteEquipment({ id })); // Dispatch deleteCrop action
   };
 
   return (
@@ -156,7 +188,7 @@ function EquipmentAddForm() {
     </div>
 
     <div className="mt-12">
-      <EquipmentTable/>
+      <EquipmentTable equipmentList={equipmentList} handleDelete={handleDelete}/>
     </div>
     </>
   )
