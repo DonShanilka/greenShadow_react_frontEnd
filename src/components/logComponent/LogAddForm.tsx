@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import LogTable from "./LogTable";
+import { useDispatch, useSelector } from "react-redux";
 
 function LogAddForm() {
   const [logDate, setLogDate] = useState("");
   const [logDetails, setLogDetails] = useState("");
   const [logImage, setLogImage] = useState<File | null>(null);
+
+  const equipmentList = useSelector((state : any) => state.equipments);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

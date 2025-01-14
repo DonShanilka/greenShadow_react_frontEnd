@@ -43,127 +43,206 @@ function StaffUpdateForm({ onClose, initialData }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="w-full max-w-lg p-6 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Update Equipment</h2>
+      <div className="w-full max-w-5xl  p-6 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Update Staff</h2>
         <form onSubmit={handleUpdate} className="space-y-6">
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Enter equipment name"
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="type" className="block text-sm font-medium">
-                Type
-              </label>
-              <input
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleInputChange}
-                placeholder="Enter equipment type"
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="availableCount"
-                className="block text-sm font-medium"
-              >
-                Available Count
-              </label>
-              <input
-                id="availableCount"
-                name="availableCount"
-                type="number"
-                value={formData.availableCount}
-                onChange={handleInputChange}
-                placeholder="Enter available count"
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="eqstatus" className="block text-sm font-medium">
-                Status
-              </label>
-              <select
-                id="eqstatus"
-                name="eqstatus"
-                value={formData.eqstatus}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              >
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="staffIdOnEquipment"
-                className="block text-sm font-medium"
-              >
-                Staff ID
-              </label>
-              <select
-                id="staffIdOnEquipment"
-                name="staffIdOnEquipment"
-                value={formData.staffIdOnEquipment}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              >
-                <option value="" disabled>
-                  Select Staff ID
-                </option>
-                <option value="staff1">Staff 1</option>
-                <option value="staff2">Staff 2</option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="fieldIdOnEquipment"
-                className="block text-sm font-medium"
-              >
-                Field ID
-              </label>
-              <select
-                id="fieldIdOnEquipment"
-                name="fieldIdOnEquipment"
-                value={formData.fieldIdOnEquipment}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-200 rounded-md"
-                required
-              >
-                <option value="" disabled>
-                  Select Field ID
-                </option>
-                <option value="field1">Field 1</option>
-                <option value="field2">Field 2</option>
-              </select>
-            </div>
+        <div className="grid grid-cols-3 sm:grid-cols-2 gap-6">
+          {/* First Name */}
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-medium">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
           </div>
 
-          <div className="flex gap-4 justify-end pt-4">
+          {/* Last Name */}
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Designation */}
+          <div>
+            <label htmlFor="designation" className="block text-sm font-medium">
+              Designation
+            </label>
+            <input
+              type="text"
+              id="designation"
+              name="designation"
+              value={formData.designation}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label htmlFor="gender" className="block text-sm font-medium">
+              Gender
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            >
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+
+          {/* Joined Date */}
+          <div>
+            <label htmlFor="joinedDate" className="block text-sm font-medium">
+              Joined Date
+            </label>
+            <input
+              type="date"
+              id="joinedDate"
+              name="joinedDate"
+              value={formData.joinedDate}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Date of Birth */}
+          <div>
+            <label htmlFor="dob" className="block text-sm font-medium">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              value={formData.dob}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Contact Number */}
+          <div>
+            <label htmlFor="contactNo" className="block text-sm font-medium">
+              Mobile
+            </label>
+            <input
+              type="tel"
+              id="contactNo"
+              name="contactNo"
+              value={formData.contactNo}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            />
+          </div>
+
+          {/* Role */}
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium">
+              Role
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+              required
+            >
+              <option value="MANAGER">Manager</option>
+              <option value="ADMINISTRATIVE">Administrative</option>
+              <option value="SCIENTIST">Scientist</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+
+          {/* Address Fields */}
+          {Array.from({ length: 5 }, (_, index) => (
+            <div key={`address${index + 1}`}>
+              <label
+                htmlFor={`address${index + 1}`}
+                className="block text-sm font-medium"
+              >
+                Address {index + 1}
+              </label>
+              <input
+                type="text"
+                id={`address${index + 1}`}
+                name={`address${index + 1}`}
+                value={formData[`address${index + 1}` as keyof StaffFormData]}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+                required
+              />
+            </div>
+          ))}
+
+          {/* Staff Field ID */}
+          <div>
+            <label htmlFor="staffFieldId" className="block text-sm font-medium">
+              Field ID
+            </label>
+            <select
+              id="staffFieldId"
+              name="staffFieldId"
+              value={formData.staffFieldId}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
+            >
+              <option value="">Choose Field ID</option>
+              {/* Replace with dynamic options */}
+              <option value="field1">Field 1</option>
+              <option value="field2">Field 2</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Update and Clode Button */}
+        <div className="flex gap-4 justify-end pt-4">
             <button
               type="submit"
-              className="bg-emerald-500 font-bold text-white py-2 px-4 rounded-md hover:bg-emerald-600"
+              className="bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-orange-500"
             >
               Update
             </button>
