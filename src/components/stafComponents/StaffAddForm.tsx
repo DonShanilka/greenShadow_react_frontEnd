@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StaffTable from "./StaffTable";
 import { useDispatch, useSelector } from "react-redux";
-import { addStaff } from "../../reducer/StaffSlice";
+import { addStaff, deleteStaff } from "../../reducer/StaffSlice";
 
 
 function StaffAddForm() {
@@ -97,6 +97,10 @@ function StaffAddForm() {
     } else {
       alert("Please Fill in All Fields");
     }
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteStaff({ id })); 
   };
 
   return (
@@ -309,7 +313,7 @@ function StaffAddForm() {
     </div>
 
     <div className="mt-12">
-      <StaffTable staffList={staffList} />      
+      <StaffTable staffList={staffList} handleDelete={handleDelete}/>      
     </div>
     </>
   )

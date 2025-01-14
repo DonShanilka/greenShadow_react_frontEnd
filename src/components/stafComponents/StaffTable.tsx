@@ -2,6 +2,9 @@ import { Delete, EditIcon } from 'lucide-react'
 import React from 'react'
 
 function StaffTable({staffList = []}) {
+
+  
+
   return (
     <>
       <div className="w-full mt-6 overflow-x-auto">
