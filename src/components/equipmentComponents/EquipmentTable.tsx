@@ -7,7 +7,7 @@ function EquipmentTable({equipmentList = [],handleDelete}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEqu, setSelectedEqu] = useState(null);
 
-  const openUpdateModal = (equipment) => {
+  const openUpdateModal = (equipment : any) => {
     setSelectedEqu(equipment);
     setIsModalOpen(true);
   };

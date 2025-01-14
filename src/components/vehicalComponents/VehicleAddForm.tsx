@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import VehicalTable from "./VehicalTable";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteVehicle } from "../../reducer/VehicalSlice";
+import { addVehicle, deleteVehicle } from "../../reducer/VehicalSlice";
 
 function VehicleAddForm() {
 
@@ -38,7 +38,28 @@ function VehicleAddForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // onSubmit(formData);
+    if (
+      formData.licensePlate &&
+      formData.category &&
+      formData.fuelType &&
+      formData.status &&
+      formData.remarks &&
+      formData.staffIdOnVehicle 
+    ) {
+      const newVehicalData = {...formData, id: new Date().getTime(),}
+      dispatch(addVehicle(newVehicalData));
+      setFormData({
+        licensePlate: "",
+        category: "",
+        fuelType: "",
+        status: "",
+        remarks: "",
+        staffIdOnVehicle: "",
+      });
+      console.log(newVehicalData);
+    } else {
+      alert("Please Fill in All Fields");
+    }
   };
 
   const handleDelete = (id: number) => {

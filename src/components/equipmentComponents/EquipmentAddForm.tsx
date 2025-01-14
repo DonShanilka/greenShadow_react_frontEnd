@@ -23,10 +23,10 @@ function EquipmentAddForm() {
     fieldIdOnEquipment: "",
   });
 
-  const equipmentList = useSelector((state) => state.equipments);
+  const equipmentList = useSelector((state : any) => state.equipments);
   const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -34,7 +34,7 @@ function EquipmentAddForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // onSubmit(formData);
     if (formData.name &&

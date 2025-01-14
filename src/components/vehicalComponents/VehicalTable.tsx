@@ -1,7 +1,18 @@
 import { Delete, EditIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 function VehicalTable({vehicalList = [], handleDelete}) {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVehical, setSelectedVehical] = useState(null);
+
+  const openUpdateModal = (vehical: any) => {
+    setSelectedVehical(vehical);
+    setIsModalOpen(true);
+  }
+
+  
+
   return (
     <>
       <div className="w-full mt-6 overflow-x-auto">
