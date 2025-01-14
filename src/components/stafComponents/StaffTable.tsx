@@ -62,7 +62,7 @@ function StaffTable({staffList = [], handleDelete}) {
               <td className="px-4 py-2 border-b">{staff.staffFieldId}</td>
               <td className="px-4 py-2 border-b">
                 <button
-                  onClick={() => openUpdateModal(field)}
+                  onClick={() => openUpdateModal(staff)}
                   className="bg-orange-400 hover:bg-orange-500 text-white py-1 px-3 rounded-md"
                 >
                   <EditIcon />
