@@ -20,7 +20,7 @@ const LogEntrySlice = createSlice({
       }
     },
     deleteLog: (state,action) => {
-      return state.filter((log) => log.logId !== action.payload.logId);
+      return state.filter((log) => log.id !== action.payload.id);
     },
   },
 })
