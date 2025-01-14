@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import VehicalTable from "./VehicalTable";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteVehicle } from "../../reducer/VehicalSlice";
 
 function VehicleAddForm() {
 
@@ -21,6 +23,9 @@ function VehicleAddForm() {
     staffIdOnVehicle: "",
   });
 
+  const vehicalList = useSelector((state: any) => state.vehicles);
+  const dispatch = useDispatch();
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -33,7 +38,11 @@ function VehicleAddForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
+    // onSubmit(formData);
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteVehicle({ id })); 
   };
 
   return (
@@ -149,7 +158,7 @@ function VehicleAddForm() {
     </div>
 
     <div className="mt-12">
-      <VehicalTable/>
+      <VehicalTable vehicalList={vehicalList} handleDelete={handleDelete}/>
     </div>
     </>
   )

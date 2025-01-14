@@ -1,6 +1,7 @@
+import { Delete, EditIcon } from 'lucide-react'
 import React from 'react'
 
-function VehicalTable() {
+function VehicalTable({vehicalList = [], handleDelete}) {
   return (
     <>
       <div className="w-full mt-6 overflow-x-auto">
@@ -18,7 +19,7 @@ function VehicalTable() {
           </tr>
         </thead>
         <tbody className="text-center">
-          {/* {fields.map((field) => (
+          {fields.map((field) => (
             <tr key={field.id}>
               <td className="px-4 py-2 border-b">{field.fieldId}</td>
               <td className="px-4 py-2 border-b">{field.fieldName}</td>
@@ -41,7 +42,7 @@ function VehicalTable() {
                 </button>
               </td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </div>
