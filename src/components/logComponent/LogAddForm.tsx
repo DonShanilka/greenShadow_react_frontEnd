@@ -8,31 +8,31 @@ function LogAddForm() {
   const [logDetails, setLogDetails] = useState("");
   const [logImage, setLogImage] = useState<File | null>(null);
 
-  const equipmentList = useSelector((state : any) => state.logs);
+  const logList = useSelector((state : any) => state.logs);
   const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Prepare form data
-    const formData = new FormData();
-    formData.append("logDate", logDate);
-    formData.append("logDetails", logDetails);
-    if (logImage) {
-      formData.append("logImage", logImage);
-    }
-
+  
     if (logDate && logDetails && logImage !== null) {
-      dispatch(addLog(formData));
+      const newLogData = {
+        id: new Date().getTime(),
+        logDate,
+        logDetails,
+        logImage: logImage ? URL.createObjectURL(logImage) : null, // Convert to URL for preview
+      };
+  
+      dispatch(addLog(newLogData));
+  
+      // Reset form state
       setLogDate("");
       setLogDetails("");
       setLogImage(null);
     } else {
       alert("Please Fill in All Fields");
     }
-    console.log("Form submitted:", { logDate, logDetails, logImage });
-    // Submit the form data to an API or parent function
   };
+  
 
   const handleDelete = (id: number) => {
     dispatch(deleteLog({ id })); 
@@ -111,7 +111,7 @@ function LogAddForm() {
     </div>
 
     <div className="mt-12">
-      <LogTable equipmentList={equipmentList} />
+      <LogTable logList={logList} handleDelete={handleDelete}/>
     </div>
     </>
   );
