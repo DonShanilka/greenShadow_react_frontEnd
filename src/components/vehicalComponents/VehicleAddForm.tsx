@@ -11,7 +11,7 @@ function VehicleAddForm() {
     fuelType: string;
     status: string;
     remarks: string;
-    staffIdOnVehicle: string;
+    staffId: string;
   }
 
   const [formData, setFormData] = useState<VehicleFormData>({
@@ -20,15 +20,13 @@ function VehicleAddForm() {
     fuelType: "",
     status: "",
     remarks: "",
-    staffIdOnVehicle: "",
+    staffId: "",
   });
 
   const vehicalList = useSelector((state: any) => state.vehicles);
   const dispatch = useDispatch();
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -44,7 +42,7 @@ function VehicleAddForm() {
       formData.fuelType &&
       formData.status &&
       formData.remarks &&
-      formData.staffIdOnVehicle 
+      formData.staffId 
     ) {
       const newVehicalData = {...formData, id: new Date().getTime(),}
       dispatch(addVehicle(newVehicalData));
@@ -54,7 +52,7 @@ function VehicleAddForm() {
         fuelType: "",
         status: "",
         remarks: "",
-        staffIdOnVehicle: "",
+        staffId: "",
       });
       console.log(newVehicalData);
     } else {
@@ -151,9 +149,9 @@ function VehicleAddForm() {
               Staff ID
             </label>
             <select
-              id="staffIdOnVehicle"
-              name="staffIdOnVehicle"
-              value={formData.staffIdOnVehicle}
+              id="staffId"
+              name="staffId"
+              value={formData.staffId}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-200 rounded-md focus:outline-none focus:border-emerald-600 focus:ring-emerald-200 block sm:text-sm focus:ring-2"
             >

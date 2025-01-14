@@ -17,7 +17,6 @@ function EquipmentTable({equipmentList = [],handleDelete}) {
     setIsModalOpen(false);
   };
 
-
   return (
     <div className="w-full mt-6 overflow-x-auto">
       <table className="min-w-full table-auto border-collapse">
