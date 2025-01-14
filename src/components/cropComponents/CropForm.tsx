@@ -78,34 +78,22 @@ const CropForm = () => {
     dispatch(deleteCrop({ id })); // Dispatch deleteCrop action
   };
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editId, setEditId] = useState(null);
+  // const [isEditing, setIsEditing] = useState(false);
+  // const [editId, setEditId] = useState(null);
 
-const handleEdit = (crop) => {
-  setIsEditing(true);
-  setEditId(crop.id);
-  setFormData({
-    cropName: crop.cropName,
-    scientificName: crop.scientificName,
-    category: crop.category,
-    season: crop.season,
-    fieldId: crop.fieldId,
-    cropImage: crop.cropImage,
-  });
-  setImagePreview(null); // Reset preview if needed
-};
-
-const handleSaveOrUpdate = () => {
-  if (isEditing) {
-    dispatch(updateCrop({ ...formData, id: editId }));
-  } else {
-    dispatch(addCrop({ ...formData, id: new Date().getTime() }));
-  }
-  setIsEditing(false);
-  setEditId(null);
-  // resetForm();
-};
-
+// const handleEdit = (crop) => {
+//   setIsEditing(true);
+//   setEditId(crop.id);
+//   setFormData({
+//     cropName: crop.cropName,
+//     scientificName: crop.scientificName,
+//     category: crop.category,
+//     season: crop.season,
+//     fieldId: crop.fieldId,
+//     cropImage: crop.cropImage,
+//   });
+//   setImagePreview(null); // Reset preview if needed
+// };
 
   return (
     <>

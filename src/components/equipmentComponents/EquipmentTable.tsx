@@ -1,5 +1,6 @@
 import { Delete, EditIcon } from 'lucide-react'
 import React, { useState } from 'react'
+import EquipmentUpdateForm from './EquipmentUpdateForm';
 
 function EquipmentTable({equipmentList = [],handleDelete}) {
 
@@ -60,6 +61,18 @@ function EquipmentTable({equipmentList = [],handleDelete}) {
           ))}
         </tbody>
       </table>
+
+      {/* Update Modal */}
+      {isModalOpen && selectedEqu && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-full max-w-2xl p-6 rounded-lg shadow-lg">
+            <EquipmentUpdateForm
+              initialData={selectedEqu}
+              onClose={closeUpdateModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
