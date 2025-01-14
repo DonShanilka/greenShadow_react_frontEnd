@@ -10,7 +10,7 @@ const vehicleSlice = createSlice({
       state.push(action.payload);
     },
     updateVehicle: (state, action) => {
-      const index = state.findIndex(vehicle => vehicle.licensePlate === action.payload.licensePlate);
+      const index = state.findIndex(vehicle => vehicle.id === action.payload.id);
       if (index !== -1) {
         state[index] = {
           ...state[index],
@@ -19,7 +19,7 @@ const vehicleSlice = createSlice({
       }
     },
     deleteVehicle: (state, action) => {
-      return state.filter(vehicle => vehicle.licensePlate !== action.payload.licensePlate);
+      return state.filter(vehicle => vehicle.id !== action.payload.id);
     },
   },
 });
