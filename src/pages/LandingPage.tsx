@@ -5,6 +5,7 @@ const LandingPage = () => {
   return (
     <div className="mainDiv">
       <div className="textDiv max-w-7xl mx-auto text-center">
+        <img src="src\assets\image\landing\treeImage.png" alt="" className=''/>
         <h2 className="text-8xl font-semibold text-white mb-6">
           Welcome to Green Shadow
         </h2>
