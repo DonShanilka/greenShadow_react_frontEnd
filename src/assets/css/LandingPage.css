@@ -12,12 +12,21 @@
 
 .textDiv {
   position: absolute;
-  top: 40%;
+  top: 49.4%;
   left: 0%;
   right: 0%;
 }
 
 .treeImage {
   position: absolute;
-  
+  height: 100%;
+  left: 25%;
+  width: 50%;
+}
+
+.green-div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #0b342400;
 }
